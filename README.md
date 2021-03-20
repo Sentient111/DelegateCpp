@@ -1,7 +1,7 @@
 # DelegateCpp
-Easy to use delegate class for c++
-This class can hold multiple functions and execute them all at once on demand.
-Example: You have multiple buttons in a UI and you need to keep track of active buttons.
+Easy to use delegate class for c++                                         
+This class can hold multiple functions and execute them all at once on demand.                                   
+Example: You have multiple buttons in a UI and you need to keep track of active buttons.                                    
 Checking every frame if a button is true for each function is not good. Adding all active functions to a Delegate and removing them when a button is toggled will save some performance.
 
 ## How to use:
