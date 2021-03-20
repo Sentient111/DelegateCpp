@@ -3,8 +3,8 @@ Easy to use delegate class for c++
 
 
 ## How to use:
-In Test.cpp is a simple example.  
-Make sure to define a reasonable array size in the Delegate class that holds the functions.
+In Test.cpp is a simple example.                
+Make sure to define a reasonable array size in the Delegate class that holds the functions. 
 Create a Delegate object with: ```Delegate myDelegate {};```
 Add the functions you want to run to it with: ```myDelegate.Add((DWORD)MyFunctionName);```
 Execute every function inside it with ```myDelegate.Execute();```
