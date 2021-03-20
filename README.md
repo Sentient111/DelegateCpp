@@ -11,4 +11,4 @@ Execute every function inside it with ```myDelegate.Execute();```
 Remove functions with ```myDelegate.Remove((DWORD)MyFunctionName);```
 
 ## Why is this made?
-I did a little bit of searching around since I needed it in one of my projects and did not find a simple solution like the one in c#.
+I did a little bit of searching around since I needed it in one of my projects. It apears that there is not such a simple solution like in c#, so I decided to make my own one.
