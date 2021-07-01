@@ -1,23 +1,39 @@
 #pragma once
 #include <Windows.h>
+#include <vector>
 
 class Delegate
 {
 public:
-	Delegate();
-	DWORD functions[10];
+	//ctor
+	Delegate() = default;
+
+	//variables
+	std::vector<void*> functions;
 	int count = 0;
 
-	bool Add(DWORD func);
+	//functions
+	bool Add(void* func);
+	bool Remove(void* func);
 	void Execute();
-	bool Remove(DWORD func);
 
+	//overloads
+	bool operator+(void* func) { return this->Add(func); }
+	bool operator-(void* func) { return this->Remove(func); }
+	void operator()() { this->Execute(); }
+
+	void* operator[](int i) 
+	{ 
+		if (i > count)
+			return nullptr;
+
+		return this->functions[i]; 
+	}
+
+private:
 	void RemoveArrayItem(int pos);
 };
 
-Delegate::Delegate()
-{
-}
 
 void Delegate::Execute()
 {
@@ -26,25 +42,23 @@ void Delegate::Execute()
 		void(*pointer)();
 		pointer = (void(*)())this->functions[i];
 		pointer();
+		this->functions[i];
 	}
 	return;
 }
 
-bool Delegate::Add(DWORD func)
+bool Delegate::Add(void* func)
 {
-	for (int i = 0; i < this->count; i++)
-	{
-		if (this->functions[i] == func)
-		{
-			return false;
-		}
-	}
-	this->functions[this->count] = func;
+
+	if (std::find(this->functions.begin(), this->functions.end(), func) != this->functions.end())
+		return false;
+
+	this->functions.push_back(func);
 	this->count++;
 	return true;
 }
 
-bool Delegate::Remove(DWORD func)
+bool Delegate::Remove(void* func)
 {
 	for (int i = 0; i < this->count; i++)
 	{
