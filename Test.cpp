@@ -1,43 +1,29 @@
 #include <iostream>
-#include <Windows.h>
 #include "Delegate.h"
-using namespace std;
 
 
-int Add();
-int Remove();
-int BlaBla();
+Delegate myDel;
 
-Delegate myDel{};
+void Test()
+{
+	std::cout << "ran func" << std::endl;
+}
 
 
 int main()
 {
-    myDel.Add((DWORD)Add);
-    myDel.Add((DWORD)Remove);
-    myDel.Add((DWORD)BlaBla);
-    myDel.Execute();
+	//adding a function (both do the same)
+	myDel.Add(Test); 
+	myDel + Test;
 
-    cout << "Removing Function Add()..." << endl;
-    myDel.Remove((DWORD)Add);
-    myDel.Execute();
-}
+	//removing a function (both do the same)
+	myDel.Remove(Test);
+	myDel - Test;
 
+	//running delegate (you know the drill)
+	myDel.Execute();
+	myDel();
 
-int Add()
-{
-    cout << "Function executed -> Add()" << endl;
-    return 3;
-}
-
-int Remove()
-{
-    cout << "Function executed -> Remove()" << endl;
-    return 2;
-}
-
-int BlaBla()
-{
-    cout << "Function executed -> BlaBla()" << endl;
-    return 1;
+	//getting element of delegate
+	myDel[2]; //returns NULL or nullptr when index out of bound
 }
